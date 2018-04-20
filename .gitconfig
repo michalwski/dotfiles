@@ -1,0 +1,30 @@
+[user]
+	name = Michal Piotrowski
+	email = michal.piotrowski@erlang-solutions.com
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+[color]
+	branch = auto
+	diff = auto
+	grep = auto
+	interactive = auto
+	status = auto
+[core]
+	excludesfile = /Users/michal.piotrowski/.gitignore
+	editor = /usr/local/bin/vim
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
