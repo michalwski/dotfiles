@@ -40,7 +40,6 @@
 
 -include("docsh_user_default.hrl").
 
-
 help() ->
     shell_default:help(),
     format("** user extended commands **~n"),
