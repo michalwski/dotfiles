@@ -5,7 +5,14 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="crunch"
+
+PRIMARY_FG=white
+DEFAULT_USER=`whoami`
+POWERLEVEL9K_MODE='awesome-fontconfig'
+POWERLEVEL9K_COLOR_SCHEME='light'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='cyan'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='magneta'
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -51,8 +58,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-. /Users/michal.piotrowski/erlang/19.2/activate
-source $HOME/.kiex/elixirs/elixir-1.5.2.env
+source "$HOME/erlang/21.0/activate"
+source $HOME/.kiex/elixirs/elixir-1.5.3.env
 # export MANPATH="/usr/local/man:$MANPATH"
 export HOMEBREW_GITHUB_API_TOKEN=67579cb4093ab7df79a9f250782e8a0bea16a790
 
@@ -81,8 +88,6 @@ bindkey -M vicmd "j" down-line-or-beginning-search
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-
 mimexec () { echo `git rev-parse --show-toplevel`/_build/$1/rel/mongooseim/bin/$2; }
 
 mimc () { eval `mimexec prod mongooseimctl` $@; }
@@ -101,8 +106,4 @@ PERL_MM_OPT="INSTALL_BASE=/Users/michal.piotrowski/perl5"; export PERL_MM_OPT;
 
 function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 
-eval "$(direnv hook zsh)"
-
-# added by travis gem
-[ -f /Users/michal.piotrowski/.travis/travis.sh ] && source /Users/michal.piotrowski/.travis/travis.sh
-alias config='/usr/bin/git --git-dir=/Users/michal.piotrowski/.cfg/ --work-tree=/Users/michal.piotrowski'
+alias config='/usr/bin/git --git-dir=/Users/michalpiotrowski/.cfg/ --work-tree=/Users/michalpiotrowski'
