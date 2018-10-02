@@ -13,7 +13,7 @@
 	interactive = auto
 	status = auto
 [core]
-	excludesfile = /Users/michal.piotrowski/.gitignore
+	excludesfile = /Users/michalpiotrowski/.gitignore_global
 	editor = /usr/local/bin/vim
 [filter "media"]
 	clean = git-media-clean %f
@@ -22,7 +22,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean %f
