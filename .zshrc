@@ -57,9 +57,10 @@ plugins=(git, brew, history-substring-search, docker, vi-mode, mix-fast)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-source "$HOME/erlang/21.0/activate"
-source $HOME/.kiex/elixirs/elixir-1.5.3.env
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/2.7/bin"
+export ERL_AFLAGS="-kernel shell_history enabled"
+#source "$HOME/erlang/21.0/activate"
+#source $HOME/.kiex/elixirs/elixir-1.5.3.env
 # export MANPATH="/usr/local/man:$MANPATH"
 export HOMEBREW_GITHUB_API_TOKEN=67579cb4093ab7df79a9f250782e8a0bea16a790
 
