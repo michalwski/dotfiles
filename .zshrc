@@ -61,7 +61,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/2
 export ERL_AFLAGS="-kernel shell_history enabled"
 export LC_ALL=en_US.UTF-8
 #test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-#source "$HOME/erlang/21.0/activate"
+#source "$HOME/erlang/22.3.4.1/activate"
 #source $HOME/.kiex/elixirs/elixir-1.5.3.env
 # export MANPATH="/usr/local/man:$MANPATH"
 #export HOMEBREW_GITHUB_API_TOKEN=67579cb4093ab7df79a9f250782e8a0bea16a790
