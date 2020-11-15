@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -8,11 +15,14 @@ ZSH=$HOME/.oh-my-zsh
 
 PRIMARY_FG=white
 DEFAULT_USER=`whoami`
+#powerlevel10k
+# brew install romkatv/powerlevel10k/powerlevel10k
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='cyan'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='magneta'
-ZSH_THEME="powerlevel9k/powerlevel9k"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -111,5 +121,10 @@ function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 
 alias config='/usr/bin/git --git-dir=/Users/michalpiotrowski/.cfg/ --work-tree=/Users/michalpiotrowski'
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+#. $HOME/.asdf/asdf.sh
+#. $HOME/.asdf/completions/asdf.bash
+
+. /usr/local/opt/asdf/asdf.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
