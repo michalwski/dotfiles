@@ -62,7 +62,7 @@ POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='magneta'
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew history-substring-search docker vi-mode mix-fast)
+plugins=(git brew history-substring-search docker vi-mode mix-fast direnv)
 
 source $ZSH/oh-my-zsh.sh
 
