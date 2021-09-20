@@ -1,6 +1,7 @@
 
 require("michal.plugins")
 
+
 require("michal.tree-sitter")
 
 local LSP = require("michal.lsp")
@@ -19,5 +20,8 @@ LSP.setup("elixirls", {
 
 local opt = vim.opt
 
+opt.termguicolors = true
 opt.foldmethod = "syntax"
 opt.foldlevelstart = 99
+
+require("michal.colors")

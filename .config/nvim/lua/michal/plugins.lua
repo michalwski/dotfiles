@@ -24,4 +24,13 @@ return startup(function(use, use_rocks)
     end,
   })
 
+  -- color sheme
+  use("marko-cerovac/material.nvim")
+  use 'sainnhe/edge'
+  use 'folke/tokyonight.nvim'
+  use 'Th3Whit3Wolf/one-nvim'
+
+
+
+
 end)
