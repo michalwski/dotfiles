@@ -18,14 +18,15 @@ M.on_attach = function(_, bufnr)
   local map_opts = { noremap = true, silent = true }
 
   map("n", "df", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<cr>", map_opts)
-  map("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", map_opts)
-  map("n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", map_opts)
+  map("n", "Gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", map_opts)
+  map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", map_opts)
   map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
   map("n", "gD", "<cmd>lua vim.lsp.buf.implementation()<cr>", map_opts)
-  map("n", "1gD", "<cmd>lua vim.lsp.buf.type_definition()<cr>", map_opts)
+  map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", map_opts)
   map("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references{}<cr>", map_opts)
   map("n", "g0", "<cmd>lua require'telescope.builtin'.lsp_document_symbols{}<cr>", map_opts)
   map("n", "gW", "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<cr>", map_opts)
+  map("n", "tt", "<cmd>lua require'telescope.builtin'.treesitter{}<cr>", map_opts)
 
 end
 

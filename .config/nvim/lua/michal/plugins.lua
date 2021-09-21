@@ -51,6 +51,21 @@ return startup(function(use, use_rocks)
   use 'preservim/vimux'
   use 'spiegela/vimix'
 
+  -- FZF
+  use({
+    "junegunn/fzf",
+    run = function()
+      vim.fn["fzf#install"]()
+    end,
+  })
+  use("junegunn/fzf.vim")
+
+  -- Telescope
+  use {
+	  'nvim-telescope/telescope.nvim',
+	  requires = { {'nvim-lua/plenary.nvim'} }
+  }
+
 
 
 
