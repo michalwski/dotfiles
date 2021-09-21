@@ -1,6 +1,7 @@
 
 require("michal.plugins")
 
+require("michal.nvim-cmp")
 
 require("michal.tree-sitter")
 
@@ -10,7 +11,7 @@ local path_to_elixirls = vim.fn.expand(vim.fn.stdpath("data") .. "/lspinstall/el
 LSP.setup("elixirls", {
   settings = {
     elixirLS = {
-      dialyzerEnabled = false,
+      dialyzerEnabled = true,
       fetchDeps = false,
       enableTestLenses = true,
     },
