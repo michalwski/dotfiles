@@ -16,7 +16,7 @@ return startup(function(use, use_rocks)
   use("neovim/nvim-lspconfig")
   use("kabouzeid/nvim-lspinstall")
 
-  -- Treesitter helpers
+  -- Treesitter helpers (requires tree-sitter cli command)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = function()
@@ -29,6 +29,24 @@ return startup(function(use, use_rocks)
   use 'sainnhe/edge'
   use 'folke/tokyonight.nvim'
   use 'Th3Whit3Wolf/one-nvim'
+
+  -- auto insert code end block
+  use 'tpope/vim-endwise'
+  -- git integration
+  use 'tpope/vim-fugitive'
+  use 'airblade/vim-gitgutter'
+  -- unneeded white spaces detection
+  use 'ntpeters/vim-better-whitespace'
+
+  -- faster grep (requires ack cli commnad)
+  use 'mileszs/ack.vim'
+
+  -- tmux integration plugins
+  use 'christoomey/vim-tmux-navigator'
+  use 'preservim/vimux'
+  use 'spiegela/vimix'
+
+
 
 
 
