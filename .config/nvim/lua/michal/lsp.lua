@@ -11,6 +11,15 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local has_run = {}
 
+augroup = function(name, callback)
+  vim.cmd("augroup " .. name)
+  vim.cmd("autocmd!")
+  callback(function(cmd)
+    vim.cmd("autocmd " .. cmd)
+  end)
+  vim.cmd("augroup END")
+end
+
 M.on_attach = function(_, bufnr)
   local function map(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -27,6 +36,11 @@ M.on_attach = function(_, bufnr)
   map("n", "g0", "<cmd>lua require'telescope.builtin'.lsp_document_symbols{}<cr>", map_opts)
   map("n", "gW", "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<cr>", map_opts)
   map("n", "tt", "<cmd>lua require'telescope.builtin'.treesitter{}<cr>", map_opts)
+
+  augroup("auto_format", function(autocmd)
+	  autocmd([[BufWritePre <buffer> noautocmd silent update | lua vim.lsp.buf.formatting_seq_sync()]])
+
+  end)
 
 end
 

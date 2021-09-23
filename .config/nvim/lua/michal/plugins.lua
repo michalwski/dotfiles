@@ -49,7 +49,9 @@ return startup(function(use, use_rocks)
   -- tmux integration plugins
   use 'christoomey/vim-tmux-navigator'
   use 'preservim/vimux'
-  use 'spiegela/vimix'
+
+  -- running tests
+  use 'vim-test/vim-test'
 
   -- FZF
   use({
