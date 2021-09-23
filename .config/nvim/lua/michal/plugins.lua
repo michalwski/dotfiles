@@ -68,6 +68,9 @@ return startup(function(use, use_rocks)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  -- elixir
+  use("elixir-editors/vim-elixir")
+
 
 
 
