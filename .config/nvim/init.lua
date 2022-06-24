@@ -19,6 +19,8 @@ opt.number = true
 opt.title = true
 opt.colorcolumn = "98"
 opt.wrap = false
+opt.hlsearch = true
+opt.incsearch = true
 
 require("michal.colors")
 
@@ -48,12 +50,24 @@ vim.api.nvim_set_keymap('', '<Leader>mt', ':TestFile<cr>', {})
 vim.api.nvim_set_keymap('', '<Leader>ml', ':TestNearest<cr>', {})
 -- Run all tests
 vim.api.nvim_set_keymap('', '<Leader>mT', ':TestSuite<cr>', {})
+-- NvimTree toogle
+vim.api.nvim_set_keymap('', '<Leader>t', ':NvimTreeToggle<cr>', {})
+vim.api.nvim_set_keymap('', '<Leader>r', ':NvimTreeRefresh<cr>', {})
+vim.api.nvim_set_keymap('', '<Leader>f', ':NvimTreeFindFile<cr>', {})
 
 -- Enable default vimix mappings
 vim.cmd([[let test#strategy = "vimux"]])
 
-local path_to_elixirls = vim.fn.expand(vim.fn.stdpath("data") .. "/lspinstall/elixir/elixir-ls/language_server.sh")
+-- automatically remove trailing whitespace
+vim.cmd([[autocmd BufWritePre * StripWhitespace]])
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+local path_to_elixirls = vim.fn.expand(vim.fn.stdpath("data") .. "/lsp_servers/elixir/elixir-ls/language_server.sh")
+-- local path_to_elixirls = vim.fn.expand("~/projects/elixir-ls/rel/language_server.sh")
 LSP.setup("elixirls", {
+  capabilities = capabilities,
   settings = {
     elixirLS = {
       dialyzerEnabled = true,

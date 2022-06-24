@@ -14,7 +14,7 @@ return startup(function(use, use_rocks)
 
   -- LSP helpers
   use("neovim/nvim-lspconfig")
-  use("kabouzeid/nvim-lspinstall")
+  use("williamboman/nvim-lsp-installer")
 
   -- Treesitter helpers (requires tree-sitter cli command)
   use({
@@ -25,15 +25,19 @@ return startup(function(use, use_rocks)
   })
 
   -- Auto completion
-  use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
 
   -- color sheme
-  use("marko-cerovac/material.nvim")
-  use 'sainnhe/edge'
-  use 'folke/tokyonight.nvim'
   use 'Th3Whit3Wolf/one-nvim'
+  use({
+	"catppuccin/nvim",
+	as = "catppuccin"
+  })
+
 
   -- auto insert code end block
   use 'tpope/vim-endwise'
@@ -71,9 +75,44 @@ return startup(function(use, use_rocks)
   -- elixir
   use("elixir-editors/vim-elixir")
 
+  -- switching between code and test files
+  use 'tpope/vim-projectionist'
 
+  -- cool icons
+  use 'kyazdani42/nvim-web-devicons'
+  use 'adelarsq/vim-devicons-emoji'
 
+  -- file tree
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function() require'nvim-tree'.setup {} end
+  }
 
+  use {
+    'nvim-lualine/lualine.nvim',
+     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
 
+  -- quickscope
+  use("unblevable/quick-scope")
+
+  -- surround
+  use("tpope/vim-surround")
+
+  -- extended . repeat
+  use("tpope/vim-repeat")
+
+  use {
+  "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
+  config = function()
+    require("trouble").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  end
+}
 
 end)

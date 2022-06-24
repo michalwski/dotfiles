@@ -2,7 +2,7 @@ local lspconfig = require("lspconfig")
 
 local configs = require("lspconfig/configs")
 
-require("lspinstall").setup()
+-- require("lspinstall").setup()
 
 M = {}
 
@@ -20,14 +20,17 @@ augroup = function(name, callback)
   vim.cmd("augroup END")
 end
 
+local map_opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap("n", "<Leader>Gd", "<cmd>lua vim.diagnostic.open_float()<cr>", map_opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', map_opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', map_opts)
+
 M.on_attach = function(_, bufnr)
   local function map(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
-  local map_opts = { noremap = true, silent = true }
 
-  map("n", "df", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<cr>", map_opts)
-  map("n", "Gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", map_opts)
+  map("n", "<Leader>af", "<cmd>lua vim.lsp.buf.formatting()<cr>", map_opts)
   map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", map_opts)
   map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
   map("n", "gD", "<cmd>lua vim.lsp.buf.implementation()<cr>", map_opts)
@@ -36,6 +39,8 @@ M.on_attach = function(_, bufnr)
   map("n", "g0", "<cmd>lua require'telescope.builtin'.lsp_document_symbols{}<cr>", map_opts)
   map("n", "gW", "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<cr>", map_opts)
   map("n", "tt", "<cmd>lua require'telescope.builtin'.treesitter{}<cr>", map_opts)
+
+  require("cmp_nvim_lsp").update_capabilities(capabilities)
 
   augroup("auto_format", function(autocmd)
 	  autocmd([[BufWritePre <buffer> noautocmd silent update | lua vim.lsp.buf.formatting_seq_sync()]])
