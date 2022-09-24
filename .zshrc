@@ -67,7 +67,7 @@ plugins=(git brew history-substring-search docker vi-mode mix-fast direnv)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/2.7/bin:$PATH"
+export PATH="/usr/local/opt/node@14/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/2.7/bin:$PATH"
 export ERL_AFLAGS="-kernel shell_history enabled"
 export LC_ALL=en_US.UTF-8
 #test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
@@ -114,6 +114,49 @@ mimdev3 () { eval `mimexec mim3 mongooseim` $@; }
 mimcfed1 () { eval `mimexec fed1 mongooseimctl` $@; }
 mimfed1 () { eval `mimexec fed1 mongooseim` $@; }
 
+is_in_git_repo() {
+    # git rev-parse HEAD > /dev/null 2>&1
+    git rev-parse HEAD > /dev/null
+}
+# Filter branches.
+git-br-fzf() {
+    is_in_git_repo || return
+
+    local tags branches target
+    tags=$(
+	git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+    branches=$(
+	git branch --all | grep -v HEAD |
+	    sed "s/.* //" | sed "s#remotes/[^/]*/##" |
+	    sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+    target=$(
+	(echo "$tags"; echo "$branches") |
+	    fzf --no-hscroll --no-multi --delimiter="\t" -n 2 \
+		--ansi --preview="git log -200 --pretty=format:%s $(echo {+2..} |  sed 's/$/../' )" ) || return
+    echo $(echo "$target" | awk -F "\t" '{print $2}')
+}
+# Filter branches and checkout the selected one with <enter> key,
+git-co-fzf() {
+    is_in_git_repo || return
+    git checkout $(git-br-fzf)
+}
+# Filter commit logs. The diff is shown on the preview window.
+git-log-fzf() { # fshow - git commit browser
+    is_in_git_repo || return
+
+    _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+    _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always %'"
+    git log --graph --color=always \
+	--format="%C(auto)%h%d [%an] %s %C(black)%C(bold)%cr" "$@" |
+    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+	--preview="$_viewGitLogLine" \
+	--bind "ctrl-m:execute:
+		(grep -o '[a-f0-9]\{7\}' | head -1 |
+		xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+		{}
+FZF-EOF"
+}
+
 PERL_MB_OPT="--install_base \"/Users/michal.piotrowski/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/michal.piotrowski/perl5"; export PERL_MM_OPT;
 
@@ -121,10 +164,14 @@ function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 
 alias config='/usr/bin/git --git-dir=/Users/michalpiotrowski/.cfg/ --work-tree=/Users/michalpiotrowski'
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 #. $HOME/.asdf/asdf.sh
 #. $HOME/.asdf/completions/asdf.bash
 
-. /usr/local/opt/asdf/asdf.sh
+. /usr/local/opt/asdf/libexec/asdf.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
