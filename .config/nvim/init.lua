@@ -7,6 +7,7 @@ require("michal.tree-sitter")
 
 -- map the <Leader> to <Space>
 vim.g.mapleader = " "
+vim.g.gitblame_highlight_group = "Question"
 
 local LSP = require("michal.lsp")
 

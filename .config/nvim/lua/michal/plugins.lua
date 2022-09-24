@@ -37,13 +37,15 @@ return startup(function(use, use_rocks)
 	"catppuccin/nvim",
 	as = "catppuccin"
   })
-
+  use 'marko-cerovac/material.nvim'
+  use 'ellisonleao/gruvbox.nvim'
 
   -- auto insert code end block
   use 'tpope/vim-endwise'
   -- git integration
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
+  use 'f-person/git-blame.nvim'
   -- unneeded white spaces detection
   use 'ntpeters/vim-better-whitespace'
 
