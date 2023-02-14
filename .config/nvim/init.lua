@@ -1,4 +1,3 @@
-
 require("michal.plugins")
 
 require("michal.nvim-cmp")
@@ -22,14 +21,21 @@ opt.colorcolumn = "98"
 opt.wrap = false
 opt.hlsearch = true
 opt.incsearch = true
+--opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+opt.grepprg = "ag --vimgrep -Q $*"
+opt.grepformat = "%f:%l:%c:%m"
 
 require("michal.colors")
 
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {})
--- FZF
-vim.api.nvim_set_keymap('n', '<C-p>', ':Files<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>g', ':GFiles<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>b', ':Buffers<CR>', {noremap = true})
+-- FZF / Telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.api.nvim_set_keymap('n', '<leader>b', "<cmd>lua require'telescope.builtin'.buffers({sort_mru = true})<cr>", {})
+vim.keymap.set('n', '<leader>g', builtin.git_files, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 -- Telescope
 
 -- Vimux Key Mappings
@@ -62,8 +68,7 @@ vim.cmd([[let test#strategy = "vimux"]])
 -- automatically remove trailing whitespace
 vim.cmd([[autocmd BufWritePre * StripWhitespace]])
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local path_to_elixirls = vim.fn.expand(vim.fn.stdpath("data") .. "/lsp_servers/elixir/elixir-ls/language_server.sh")
 -- local path_to_elixirls = vim.fn.expand("~/projects/elixir-ls/rel/language_server.sh")
@@ -78,4 +83,11 @@ LSP.setup("elixirls", {
   },
   cmd = { path_to_elixirls },
 })
+
+LSP.setup("efm", {
+  filetypes = {
+    "elixir"
+  }
+})
+
 

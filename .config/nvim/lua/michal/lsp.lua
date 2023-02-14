@@ -30,7 +30,7 @@ M.on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
 
-  map("n", "<Leader>af", "<cmd>lua vim.lsp.buf.formatting()<cr>", map_opts)
+  map("n", "<Leader>af", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", map_opts)
   map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", map_opts)
   map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
   map("n", "gD", "<cmd>lua vim.lsp.buf.implementation()<cr>", map_opts)
@@ -39,8 +39,6 @@ M.on_attach = function(_, bufnr)
   map("n", "g0", "<cmd>lua require'telescope.builtin'.lsp_document_symbols{}<cr>", map_opts)
   map("n", "gW", "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<cr>", map_opts)
   map("n", "tt", "<cmd>lua require'telescope.builtin'.treesitter{}<cr>", map_opts)
-
-  require("cmp_nvim_lsp").update_capabilities(capabilities)
 
   augroup("auto_format", function(autocmd)
 	  autocmd([[BufWritePre <buffer> noautocmd silent update | lua vim.lsp.buf.formatting_seq_sync()]])

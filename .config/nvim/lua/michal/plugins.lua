@@ -23,6 +23,7 @@ return startup(function(use, use_rocks)
       vim.cmd([[TSUpdate]])
     end,
   })
+  use 'RRethy/nvim-treesitter-endwise'
 
   -- Auto completion
   use 'hrsh7th/cmp-buffer'
