@@ -17,7 +17,7 @@ PRIMARY_FG=white
 DEFAULT_USER=`whoami`
 #powerlevel10k
 # brew install romkatv/powerlevel10k/powerlevel10k
-source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='cyan'
@@ -62,18 +62,13 @@ POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='magneta'
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew history-substring-search docker vi-mode mix-fast direnv)
+plugins=(git brew history-substring-search docker vi-mode mix-fast direnv mix-fast)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export PATH="/usr/local/opt/node@14/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/2.7/bin:$PATH"
-export ERL_AFLAGS="-kernel shell_history enabled"
 export LC_ALL=en_US.UTF-8
-#test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-#source "$HOME/erlang/22.3.4.1/activate"
-#source $HOME/.kiex/elixirs/elixir-1.5.3.env
-# export MANPATH="/usr/local/man:$MANPATH"
 #export HOMEBREW_GITHUB_API_TOKEN=67579cb4093ab7df79a9f250782e8a0bea16a790
 
 # vi mode improvements
@@ -165,13 +160,18 @@ function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 alias config='/usr/bin/git --git-dir=/Users/michalpiotrowski/.cfg/ --work-tree=/Users/michalpiotrowski'
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-#. $HOME/.asdf/asdf.sh
-#. $HOME/.asdf/completions/asdf.bash
-
-. /usr/local/opt/asdf/libexec/asdf.sh
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export GOPATH=~/go
+
+#Erlang ENV vars
+export ERL_AFLAGS="-kernel shell_history enabled"
+export KERL_BUILD_DOCS="yes"
