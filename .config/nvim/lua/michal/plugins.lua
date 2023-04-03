@@ -41,6 +41,9 @@ return startup(function(use, use_rocks)
   use 'marko-cerovac/material.nvim'
   use 'ellisonleao/gruvbox.nvim'
 
+  --auto dark/light mode
+  use 'f-person/auto-dark-mode.nvim'
+
   -- auto insert code end block
   use 'tpope/vim-endwise'
   -- git integration
