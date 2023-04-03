@@ -116,6 +116,11 @@ return startup(function(use, use_rocks)
       -- refer to the configuration section below
     }
   end
-}
+ }
+
+ use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+ }
 
 end)

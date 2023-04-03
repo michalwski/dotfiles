@@ -84,10 +84,22 @@ LSP.setup("elixirls", {
   cmd = { path_to_elixirls },
 })
 
-LSP.setup("efm", {
-  filetypes = {
-    "elixir"
-  }
+--LSP.setup("efm", {
+--  filetypes = {
+--    "elixir"
+--  }
+--})
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.eslint,
+	null_ls.builtins.diagnostics.credo,
+    },
 })
+
+
 
 
