@@ -100,6 +100,9 @@ null_ls.setup({
     },
 })
 
+local filename_section = {'filename', path = 1,}
 
-
-
+require('lualine').setup({
+    sections = { lualine_c = {filename_section}},
+    inactive_sections =  {lualine_c = {filename_section}}
+})
