@@ -41,7 +41,7 @@ M.on_attach = function(_, bufnr)
   map("n", "tt", "<cmd>lua require'telescope.builtin'.treesitter{}<cr>", map_opts)
 
   augroup("auto_format", function(autocmd)
-	  autocmd([[BufWritePre <buffer> noautocmd silent update | lua vim.lsp.buf.formatting_seq_sync()]])
+	  autocmd([[BufWritePre <buffer> noautocmd silent update | lua vim.lsp.buf.format({async = false})]])
 
   end)
 
@@ -65,6 +65,6 @@ M.setup = function(name, opts)
   end
 end
 
-vim.lsp.set_log_level(2)
+vim.lsp.set_log_level(3)
 
 return M
