@@ -84,6 +84,20 @@ LSP.setup("elixirls", {
   cmd = { path_to_elixirls },
 })
 
+LSP.setup("pylsp", {
+  capabilities = capabilities,
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {'W391'},
+          maxLineLength = 100
+        }
+      }
+    }
+  }
+})
+
 --LSP.setup("efm", {
 --  filetypes = {
 --    "elixir"
@@ -100,9 +114,12 @@ null_ls.setup({
     },
 })
 
+
 local filename_section = {'filename', path = 1,}
+
 
 require('lualine').setup({
     sections = { lualine_c = {filename_section}},
     inactive_sections =  {lualine_c = {filename_section}}
 })
+

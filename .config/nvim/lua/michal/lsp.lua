@@ -65,6 +65,6 @@ M.setup = function(name, opts)
   end
 end
 
-vim.lsp.set_log_level(3)
+vim.lsp.set_log_level('info')
 
 return M
