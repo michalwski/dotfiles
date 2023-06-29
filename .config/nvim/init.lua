@@ -28,6 +28,9 @@ opt.grepformat = "%f:%l:%c:%m"
 require("michal.colors")
 
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {})
+vim.api.nvim_set_keymap('i', '<C-s>', '<Esc>:w<cr>', {})
+vim.api.nvim_set_keymap('n', '<C-s>', '<Esc>:w<cr>', {})
+
 -- FZF / Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
@@ -70,8 +73,8 @@ vim.cmd([[autocmd BufWritePre * StripWhitespace]])
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local path_to_elixirls = vim.fn.expand(vim.fn.stdpath("data") .. "/lsp_servers/elixir/elixir-ls/language_server.sh")
--- local path_to_elixirls = vim.fn.expand("~/projects/elixir-ls/rel/language_server.sh")
+--local path_to_elixirls = vim.fn.expand(vim.fn.stdpath("data") .. "/lsp_servers/elixir/elixir-ls/language_server.sh")
+local path_to_elixirls = vim.fn.expand("~/projects/elixir-ls/release/language_server.sh")
 LSP.setup("elixirls", {
   capabilities = capabilities,
   settings = {
