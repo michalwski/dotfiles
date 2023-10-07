@@ -126,4 +126,24 @@ return startup(function(use, use_rocks)
     requires = { {'nvim-lua/plenary.nvim'} }
  }
 
+ use {
+  'kristijanhusak/vim-dadbod-ui',
+  requires = {
+    { 'tpope/vim-dadbod'},
+    { 'kristijanhusak/vim-dadbod-completion'},
+  }
+ }
+
+ use({
+  "jackMort/ChatGPT.nvim",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+})
+
 end)
