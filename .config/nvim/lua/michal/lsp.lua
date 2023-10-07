@@ -40,10 +40,9 @@ M.on_attach = function(_, bufnr)
   map("n", "gW", "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<cr>", map_opts)
   map("n", "tt", "<cmd>lua require'telescope.builtin'.treesitter{}<cr>", map_opts)
 
-  augroup("auto_format", function(autocmd)
-	  autocmd([[BufWritePre <buffer> noautocmd silent update | lua vim.lsp.buf.format({async = false})]])
-
-  end)
+-- augroup("auto_format", function(autocmd)
+--	  autocmd([[BufWritePre <buffer> noautocmd silent update | lua vim.lsp.buf.format({async = false})]])
+--  end)
 
 end
 
