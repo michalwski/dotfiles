@@ -1,14 +1,24 @@
 return {
-  "vim-test/vim-test",
-  init = function()
-    vim.cmd([[let test#strategy = "vimux"]])
-  end,
-  keys = {
-    { "<leader>mt", "<cmd>TestFile<cr>", desc = "Run test file." },
-    { "<leader>ml", "<cmd>TestNearest<cr>", desc = "Test nearest test case." },
-    { "<leader>mv", "<cmd>TestVisit<cr>", desc = "Visit the last test file." },
+  {
+    "vim-test/vim-test",
+    init = function()
+      vim.cmd([[let test#strategy = "vimux"]])
+    end,
+    keys = {
+      { "<leader>mt", "<cmd>TestFile<cr>", desc = "Run test file." },
+      { "<leader>ml", "<cmd>TestNearest<cr>", desc = "Test nearest test case." },
+      { "<leader>mv", "<cmd>TestVisit<cr>", desc = "Visit the last test file." },
+    },
+    dependencies = {
+      "preservim/vimux",
+    },
   },
-  dependencies = {
-    "preservim/vimux",
+  {
+    "tpope/vim-projectionist",
+    lazy = true,
+    keys = {
+      { "<leader>a", "<cmd>A<cr>", desc = "Switch to alternate file, test or source code." },
+    },
+    cmd = { "A" },
   },
 }
