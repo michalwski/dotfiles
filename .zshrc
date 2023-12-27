@@ -104,7 +104,11 @@ export LANG=en_US.UTF-8
 #Erlang ENV vars
 export ERL_AFLAGS="-kernel shell_history enabled"
 export KERL_BUILD_DOCS="yes"
-export KERL_CONFIGURE_OPTIONS="--disable-hipe --without-javac --without-wx"
+#export KERL_CONFIGURE_OPTIONS="--disable-hipe --without-javac --without-wx"
+#
+#Elixir-ls
+export ELS_LOCAL="1"
+export ELS_INSTALL_PREFIX="${HOME}/projects/elixir-ls/release"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
