@@ -6,6 +6,7 @@
 	co = checkout
 	br = branch
 	ci = commit
+	pnv = push --no-verify
 [color]
 	branch = auto
 	diff = auto
@@ -15,16 +16,19 @@
 [core]
 	excludesfile = /Users/michalpiotrowski/.gitignore_global
 	editor = nvim
+  pager = delta
 [mergetool "nvim"]
 	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [merge]
 	tool = nvim
+  conflictstyle = diff3
 [mergetool]
 	prompt = false
 [difftool]
 	prompt = true
 [diff]
 	tool = nvimdiff
+  colorMoved = default
 [difftool "nvimdiff"]
 	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 [filter "media"]
@@ -35,3 +39,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[delta]
+  colorMoved = default
+[interactive]
+  diffFilter = delta --color-only
