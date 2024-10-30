@@ -1,9 +1,12 @@
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -16,7 +19,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -163,6 +166,21 @@ git-log-fzf() { # fshow - git commit browser
 		xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
 		{}
 FZF-EOF"
+}
+
+kubectl_remote() {
+  local num pod ns
+  num="${2:-1}"
+  ns=$1
+
+  pod=$(
+     kubectl get pods -l app.kubernetes.io/instance=$ns --no-headers=true -n $ns |
+       awk "NR==$num" |
+       awk '{print $1}' )
+
+  echo "Remote to pod num $num - $pod"
+
+  kubectl exec -it $pod -n $ns -- bin/bet_stack remote
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
