@@ -6,3 +6,4 @@ vim.keymap.set("n", "<C-h>", vim.cmd.TmuxNavigateLeft, { noremap = true, desc = 
 vim.keymap.set("n", "<C-l>", vim.cmd.TmuxNavigateRight, { noremap = true, desc = "Window to the right" })
 vim.keymap.set("n", "<C-k>", vim.cmd.TmuxNavigateUp, { noremap = true, desc = "Window to the up" })
 vim.keymap.set("n", "<C-j>", vim.cmd.TmuxNavigateDown, { noremap = true, desc = "Window to the down" })
+vim.keymap.set("n", ";", ":", { noremap = true, desc = "Enter neovim command line" })

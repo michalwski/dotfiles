@@ -10,13 +10,24 @@ return {
       local path_to_elixirls = vim.fn.expand("~/projects/elixir-ls/release/language_server.sh")
 
       elixir.setup({
-        nextls = { enable = false },
-        credo = {},
+        nextls = {
+          enable = false,
+          init_options = {
+            mix_env = "dev",
+            mix_target = "host",
+            experimental = {
+              completions = {
+                enable = true, -- control if completions are enabled. defaults to false
+              },
+            },
+          },
+        },
+        credo = { enable = true },
         elixirls = {
           enable = true,
           cmd = path_to_elixirls,
           settings = elixirls.settings({
-            dialyzerEnabled = true,
+            dialyzerEnabled = false,
             fetchDeps = false,
             enableTestLenses = false,
           }),
