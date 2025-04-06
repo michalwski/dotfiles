@@ -7,3 +7,9 @@ vim.keymap.set("n", "<C-l>", vim.cmd.TmuxNavigateRight, { noremap = true, desc =
 vim.keymap.set("n", "<C-k>", vim.cmd.TmuxNavigateUp, { noremap = true, desc = "Window to the up" })
 vim.keymap.set("n", "<C-j>", vim.cmd.TmuxNavigateDown, { noremap = true, desc = "Window to the down" })
 vim.keymap.set("n", ";", ":", { noremap = true, desc = "Enter neovim command line" })
+vim.keymap.set(
+  "n",
+  "<leader>sof",
+  ":lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>",
+  { noremap = true, desc = "Live Grep Open Files" }
+)
