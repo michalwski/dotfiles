@@ -19,18 +19,22 @@
   pager = delta
 [mergetool "nvim"]
 	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[mergetool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
 [merge]
-	tool = nvim
+	tool = nvimdiff
   conflictstyle = diff3
 [mergetool]
 	prompt = false
 [difftool]
 	prompt = true
 [diff]
-	tool = nvimdiff
+	tool = nvim
   colorMoved = default
+
 [difftool "nvimdiff"]
-	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
+
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
@@ -41,5 +45,10 @@
 	required = true
 [delta]
   colorMoved = default
+  navigate = true
+  light = false
+  side-by-side = true
+  line-numbers = true
+  hunk-header-style = file line-number syntax
 [interactive]
   diffFilter = delta --color-only
