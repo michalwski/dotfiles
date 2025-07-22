@@ -81,15 +81,13 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew history-substring-search docker vi-mode mix-fast direnv)
+plugins=(git brew history-substring-search docker vi-mode mix-fast direnv kubie)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -113,6 +111,8 @@ export KERL_BUILD_DOCS="yes"
 export ELS_LOCAL="1"
 export ELS_INSTALL_PREFIX="${HOME}/projects/elixir-ls/release"
 
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -123,6 +123,7 @@ export ELS_INSTALL_PREFIX="${HOME}/projects/elixir-ls/release"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias config='/usr/bin/git --git-dir=/Users/michalpiotrowski/.cfg/ --work-tree=/Users/michalpiotrowski'
+alias lg='lazygit'
 
 # User functions
 is_in_git_repo() {
@@ -174,7 +175,8 @@ kubectl_remote() {
   ns=$1
 
   pod=$(
-     kubectl get pods -l app.kubernetes.io/instance=$ns --no-headers=true -n $ns |
+     kubectl get pods -l app.kubernetes.io/instance=$ns --field-selector=status.phase=Running --no-headers=true -n $ns |
+       grep -v 'reporting' |
        awk "NR==$num" |
        awk '{print $1}' )
 
