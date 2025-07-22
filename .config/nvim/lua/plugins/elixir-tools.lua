@@ -22,9 +22,9 @@ return {
             },
           },
         },
-        credo = { enable = true },
+        credo = { enable = false },
         elixirls = {
-          enable = true,
+          enable = false,
           cmd = path_to_elixirls,
           settings = elixirls.settings({
             dialyzerEnabled = false,
