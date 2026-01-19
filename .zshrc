@@ -124,6 +124,7 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 alias config='/usr/bin/git --git-dir=/Users/michalpiotrowski/.cfg/ --work-tree=/Users/michalpiotrowski'
 alias lg='lazygit'
+alias mtf='mix test --failed'
 
 # User functions
 is_in_git_repo() {
@@ -171,11 +172,12 @@ FZF-EOF"
 
 kubectl_remote() {
   local num pod ns
-  num="${2:-1}"
+  num="${3:-1}"
   ns=$1
+  name=${2:-sportsx}
 
   pod=$(
-     kubectl get pods -l app.kubernetes.io/instance=$ns --field-selector=status.phase=Running --no-headers=true -n $ns |
+     kubectl get pods -l app.kubernetes.io/instance=$ns  -l app.kubernetes.io/name=$name --field-selector=status.phase=Running --no-headers=true -n $ns |
        grep -v 'reporting' |
        awk "NR==$num" |
        awk '{print $1}' )
@@ -183,6 +185,23 @@ kubectl_remote() {
   echo "Remote to pod num $num - $pod"
 
   kubectl exec -it $pod -n $ns -- bin/bet_stack remote
+}
+
+kubectl_shell() {
+  local num pod ns
+  num="${3:-1}"
+  ns=$1
+  name=${2:-sportsx}
+
+  pod=$(
+     kubectl get pods -l app.kubernetes.io/instance=$ns  -l app.kubernetes.io/name=$name --field-selector=status.phase=Running --no-headers=true -n $ns |
+       grep -v 'reporting' |
+       awk "NR==$num" |
+       awk '{print $1}' )
+
+  echo "Connect to pod num $num - $pod"
+
+  kubectl exec -it $pod -n $ns -- bash
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
